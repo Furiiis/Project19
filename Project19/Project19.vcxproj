@@ -160,6 +160,14 @@
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="triangle.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="cat.fld" />
+    <None Include="default.fld" />
+    <None Include="ios.fld" />
+    <None Include="men.fld" />
+    <None Include="test.fld" />
+    <None Include="test2.fld" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

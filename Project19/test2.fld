@@ -1,0 +1,7 @@
+Ellipse {{42, 113}, {138, 158}}
+Rectangle {{615, 73}, {818, 145}}
+Triangle {{121, 303}, {258, 391}}
+Ellipse {{326, 325}, {465, 449}}
+LinkedLine {[1], [2]}
+LinkedLine {[1], [0]}
+LinkedLine {[0], [2]}
