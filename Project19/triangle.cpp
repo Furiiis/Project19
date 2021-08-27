@@ -3,10 +3,7 @@
 
 namespace Figure_2D {
 
-	std::pair<Coordinate, Coordinate>  Triangle::GetRectCoordinates() const
-	{
-		return std::pair<Coordinate, Coordinate>{x, y};
-	}
+	
 	Coordinate  Triangle::GetCenter() const
 	{
 		return { x.first + (y.first - x.first) / 2, x.second + (y.second - x.second) / 2 };

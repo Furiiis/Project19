@@ -9,8 +9,7 @@ namespace Figure_2D {
 	class Ellipse : public Figure
 	{
 	public:
-		Ellipse(Coordinate X, Coordinate Y) : x(X), y(Y) {}
-		std::pair<Coordinate, Coordinate> GetRectCoordinates() const override;
+		Ellipse(Coordinate X, Coordinate Y) : Figure(X, Y) {}
 
 		Coordinate GetCenter() const override;
 
@@ -27,8 +26,7 @@ namespace Figure_2D {
 
 	private:
 		Figure_Type type = Figure_Type::ELLIPSE;
-		Coordinate x;
-		Coordinate y;
+		
 	};
 
 }

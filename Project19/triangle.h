@@ -7,8 +7,7 @@ namespace Figure_2D {
 	class Triangle : public Figure
 	{
 	public:
-		Triangle(Coordinate X, Coordinate Y) : x(X), y(Y) {}
-		std::pair<Coordinate, Coordinate> GetRectCoordinates() const override;
+		Triangle(Coordinate X, Coordinate Y) : Figure(X, Y) {}
 
 		Coordinate GetCenter() const override;
 
@@ -23,9 +22,7 @@ namespace Figure_2D {
 		void WINAPI_draw(HDC hdc) const override;
 
 	private:
-		Figure_Type type = Figure_Type::TRIANGLE;
-		Coordinate x;
-		Coordinate y;
+		Figure_Type type = Figure_Type::TRIANGLE;		
 	};
 
 }

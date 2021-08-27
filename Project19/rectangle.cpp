@@ -7,11 +7,7 @@ namespace Figure_2D {
 	{
 		return { x.first + (y.first - x.first) / 2, x.second + (y.second - x.second) / 2 };
 	}
-
-	std::pair<Coordinate, Coordinate> Rectangle::GetRectCoordinates() const
-	{
-		return std::pair<Coordinate, Coordinate>{x, y};
-	}
+	
 	bool Rectangle::IsPoint(const std::pair<long, long>& point) const
 	{
 		return point.first >= x.first && point.first <= y.first && point.second >= x.second && point.second <= y.second;

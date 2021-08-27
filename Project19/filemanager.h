@@ -18,6 +18,7 @@
 #include "triangle.h"
 #include "linkedline.h"
 #include "field.h"
+#include "factory.h"
 
 
 class FileManager

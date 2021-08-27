@@ -139,28 +139,15 @@ LRESULT CALLBACK CApp::window_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		{
 			this->field.GetFigures().back()->graw(Figure_2D::Get_Displace_Vector(this->field.GetFigures().back()->GetRectCoordinates().second, { LOWORD(lParam), HIWORD(lParam) }));
 			InvalidateRect(hWnd, &this->Client_Rect, false);
-		}
-		else if (wParam & MK_LBUTTON & this->IsButton.IsRectButton)
+		}	
+		else if (wParam & MK_LBUTTON & (this->IsButton.IsTriangleButton || this->IsButton.IsRectButton || this->IsButton.IsEllipseButton))
 		{
-			this->field.AddFigure(new Figure_2D::Rectangle({ LOWORD(lParam) - 30, HIWORD(lParam) - 10 },
-				{ LOWORD(lParam), HIWORD(lParam) }));
-			zazhatieFigureButton = true;
-			this->IsButton.SetAllDown();
-		}
-		else if (wParam & MK_LBUTTON & this->IsButton.IsEllipseButton)
-		{
-			this->field.AddFigure(new Figure_2D::Ellipse({ LOWORD(lParam) - 30, HIWORD(lParam) - 10 },
-				{ LOWORD(lParam), HIWORD(lParam) }));
-			zazhatieFigureButton = true;
-			this->IsButton.SetAllDown();
-		}
-		else if (wParam & MK_LBUTTON & this->IsButton.IsTriangleButton)
-		{
-			this->field.AddFigure(new Figure_2D::Triangle({ LOWORD(lParam) - 30, HIWORD(lParam) - 10 },
-				{ LOWORD(lParam), HIWORD(lParam) }));
-			zazhatieFigureButton = true;
-			this->IsButton.SetAllDown();
-		}
+			Factory factory;
+			this->field.AddFigure(factory.createFigure2D(Figure_2D::Figure_Type_Str[chosen_figure], { LOWORD(lParam) - 30, HIWORD(lParam) - 10 },
+					{ LOWORD(lParam), HIWORD(lParam) }));
+				zazhatieFigureButton = true;
+				this->IsButton.SetAllDown();
+		}			
 		else if (wParam & MK_LBUTTON & this->IsButton.IsHandButton & zazhatie)
 		{
 			for (auto x : field.GetFigures())
@@ -253,6 +240,7 @@ LRESULT CALLBACK CApp::window_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		{
 			this->IsButton.SetAllDown();
 			this->IsButton.IsRectButton = true;
+			chosen_figure = Figure_2D::Figure_Type::RECTANGLE;
 			this->for_linking = { field.GetFigures().end(), field.GetFigures().end() };
 		}
 		break;
@@ -260,6 +248,7 @@ LRESULT CALLBACK CApp::window_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		{
 			this->IsButton.SetAllDown();
 			this->IsButton.IsEllipseButton = true;
+			chosen_figure = Figure_2D::Figure_Type::ELLIPSE;
 			this->for_linking = { field.GetFigures().end(), field.GetFigures().end() };
 		}
 		break;
@@ -267,6 +256,7 @@ LRESULT CALLBACK CApp::window_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		{
 			this->IsButton.SetAllDown();
 			this->IsButton.IsTriangleButton = true;
+			chosen_figure = Figure_2D::Figure_Type::TRIANGLE;
 			this->for_linking = { field.GetFigures().end(), field.GetFigures().end() };
 		}
 		break;

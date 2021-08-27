@@ -7,10 +7,9 @@ namespace Figure_2D {
 	class Rectangle : public Figure
 	{
 	public:
-		Rectangle(Coordinate X, Coordinate Y) : x(X), y(Y) {}
-		Coordinate GetCenter() const override;
+		Rectangle(Coordinate X, Coordinate Y) : Figure(X, Y) {}
 
-		std::pair<Coordinate, Coordinate> GetRectCoordinates() const override;
+		Coordinate GetCenter() const override;
 
 		bool IsPoint(const std::pair<long, long>& point) const override;
 
@@ -23,8 +22,6 @@ namespace Figure_2D {
 		void WINAPI_draw(HDC hdc) const override;
 
 	private:
-		Figure_Type type = Figure_Type::RECTANGLE;
-		Coordinate x;
-		Coordinate y;
+		Figure_Type type = Figure_Type::RECTANGLE;		
 	};
 }

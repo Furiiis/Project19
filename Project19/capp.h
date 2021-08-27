@@ -92,4 +92,5 @@ private:
 	FileManager file_manager;
 	std::string default_men_move_model_path = "men.fld";
 	std::string default_cat_path = "cat.fld";
+	Figure_2D::Figure_Type chosen_figure;
 };

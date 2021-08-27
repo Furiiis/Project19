@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="capp.cpp" />
     <ClCompile Include="ellipse.cpp" />
+    <ClCompile Include="factory.cpp" />
     <ClCompile Include="field.cpp" />
     <ClCompile Include="figure.cpp" />
     <ClCompile Include="filemanager.cpp" />
@@ -153,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="capp.h" />
     <ClInclude Include="ellipse.h" />
+    <ClInclude Include="factory.h" />
     <ClInclude Include="field.h" />
     <ClInclude Include="figure.h" />
     <ClInclude Include="filemanager.h" />

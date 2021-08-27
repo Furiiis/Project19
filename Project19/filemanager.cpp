@@ -1,7 +1,9 @@
 #include "filemanager.h"
+#include "factory.h"
 
 void FileManager::LoadFromFile(Field& field, char* path)
 {
+	Factory factory;
 	field.DeleteFigures();
 	field.DeleteLinkedLines();
 	std::string filename = path;
@@ -33,23 +35,14 @@ void FileManager::LoadFromFile(Field& field, char* path)
 			is >> Y.first;
 			is.ignore(1);
 			is >> Y.second;
-		}
-		if (type == "Ellipse")
-		{
-			field.AddFigure(new Figure_2D::Ellipse(X, Y));
-		}
-		if (type == "Triangle")
-		{
-			field.AddFigure(new Figure_2D::Triangle(X, Y));
-		}
-
-		if (type == "Rectangle")
-		{
-			field.AddFigure(new Figure_2D::Rectangle(X, Y));
-		}
+		}		
 		if (type == "LinkedLine")
 		{
 			field.AddLinkedLine(Figure_2D::LinkedLine(std::next(field.GetFigures().begin(), x), std::next(field.GetFigures().begin(), y)));
+		}
+		else
+		{
+			field.AddFigure(factory.createFigure2D(type, X, Y));
 		}
 
 	}
@@ -65,20 +58,10 @@ void FileManager::LoadToFile(Field& field, char* path)
 	if (out.is_open())
 	{
 		for (auto x : field.GetFigures())
-		{
-			switch (x->GetType())
-			{
-			case Figure_2D::RECTANGLE:
-				out << "Rectangle {{";
-				break;
-			case Figure_2D::ELLIPSE:
-				out << "Ellipse {{";
-				break;
-			case Figure_2D::TRIANGLE:
-				out << "Triangle {{";
-				break;
-			}
-			out << x->GetRectCoordinates().first.first <<
+		{		
+
+			out << Figure_2D::Figure_Type_Str[x->GetType()] << " {{"
+		         << x->GetRectCoordinates().first.first <<
 				", " << x->GetRectCoordinates().first.second << "}, {" <<
 				x->GetRectCoordinates().second.first << ", " <<
 				x->GetRectCoordinates().second.second << "}}\n";
@@ -96,21 +79,21 @@ void FileManager::open_file(HWND hWnd, Field& field)
 {
 	OPENFILENAME ofn;
 	size_t i;
-	char file_name[100];
+	char file_name[200];
 	ZeroMemory(&ofn, sizeof(OPENFILENAME));
 
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = hWnd;
 	ofn.lpstrFile = LPWSTR(file_name);
 	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = 100;
+	ofn.nMaxFile = 200;
 	ofn.lpstrFilter = L"Fld Files\0*.FLD\0";
 	ofn.nFilterIndex = 1;
 
 	GetOpenFileName(&ofn);
-	char adf[100];
-	wcstombs_s(&i, adf, 100,
-		ofn.lpstrFile, 100);
+	char adf[200];
+	wcstombs_s(&i, adf, 200,
+		ofn.lpstrFile, 200);
 
 
 	LoadFromFile(field, adf);
@@ -120,22 +103,21 @@ void FileManager::save_file(HWND hWnd, Field& field)
 {
 	OPENFILENAME ofn;
 	size_t i;
-	char file_name[100];
+	char file_name[200];
 	ZeroMemory(&ofn, sizeof(OPENFILENAME));
 
 	ofn.lStructSize = sizeof(OPENFILENAME);
 	ofn.hwndOwner = hWnd;
 	ofn.lpstrFile = LPWSTR(file_name);
 	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = 100;
-	ofn.lpstrFilter = L"FLD Files\0*.FLD\0";
+	ofn.nMaxFile = 200;
+	ofn.lpstrFilter = L"FLD Files\0*.fld";
 	ofn.nFilterIndex = 1;
 
 	GetSaveFileName(&ofn);
-	char adf[100];
-	wcstombs_s(&i, adf, 100,
-		ofn.lpstrFile, 100);
-
+	char adf[200];
+	wcstombs_s(&i, adf, 200,
+		ofn.lpstrFile, 200);
 
 	LoadToFile(field, adf);
 }
