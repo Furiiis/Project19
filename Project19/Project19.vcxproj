@@ -165,7 +165,6 @@
   <ItemGroup>
     <None Include="cat.fld" />
     <None Include="default.fld" />
-    <None Include="ios.fld" />
     <None Include="men.fld" />
     <None Include="test.fld" />
     <None Include="test2.fld" />
